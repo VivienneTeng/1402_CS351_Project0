@@ -1,24 +1,30 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 
 using namespace std;
 
-// Declaration of twoSum function
-vector<int> twoSum(vector<int>& nums, int target);
+vector<int> twoSumArray(vector<int>& nums, int target);
+vector<int> twoSumHash(vector<int>& nums, int target);
 
-int main() {
-    // Example usage of twoSum
-    vector<int> nums = {2, 7, 11, 15};
-    int target = 9;
-
-    vector<int> result = twoSum(nums, target);
-
+void printResult(const string& label, const vector<int>& result, const vector<int>& nums) {
+    cout << label;
     if (!result.empty()) {
-        cout << "Indices: " << result[0] << ", " << result[1] << endl;
+        cout << "Indices: " << result[0] << ", " << result[1] << " | ";
         cout << "Numbers: " << nums[result[0]] << ", " << nums[result[1]] << endl;
     } else {
         cout << "No solution found." << endl;
     }
+}
+
+int main() {
+    vector<int> nums = {2, 7, 11, 15};
+    int target = 9;
+
+    vector<int> resultArray = twoSumArray(nums, target);
+    vector<int> resultHash = twoSumHash(nums, target);
+
+    printResult("Array solution: ", resultArray, nums);
+    printResult("Hash solution:  ", resultHash, nums);
 
     return 0;
 }
