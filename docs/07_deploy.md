@@ -1,37 +1,83 @@
 # Deployment Guide
 
+This guide describes the standard operating procedure (SOP) to configure, build, and run the project from a clean clone.
+
 ## Prerequisites
-- **Java JDK 17+** or **Python 3.x** (depending on implementation language)
-- Ensure the runtime environment is installed and configured in system PATH
 
-## Compilation (Java)
-```bash
-javac TwoSum.java
-```
-Compiles the Java source file into bytecode (`.class` file)
+Before building the project, ensure your environment meets the following requirements:
+- **Git:** Installed and configured in the system PATH.
+- **C++ Compiler:** A compiler supporting **C++23** features (e.g., GCC 13+, Clang 16+, or MSVC 2022+).
+- **CMake:** Version 3.25 or higher installed.
+- **Build Tool:** Make (Linux/macOS) or Ninja/MSVC (Windows) linked with CMake.
 
-## Execution (Java)
-```bash
-java TwoSum
-```
-Runs the compiled Java program
+---
 
-## Execution (Python)
+## Clean-Start Procedure
+
+Follow these ordered steps to set up and build the project from scratch.
+
+### 1. Configure the Build Directory
+Initialize the CMake build environment from the repository root to generate the required build files:
 ```bash
-python TwoSum.py
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+
 ```
-or
+
+### 2. Build the Project
+
+Compile the C++ source files and generate the executable binary target:
+
 ```bash
-python3 TwoSum.py
+cmake --build build
+
 ```
-Executes the Python script directly (no compilation needed)
+
+### 3. Run Verification Tests
+
+Execute all unit, integration, and automated verification tests using CTest to ensure system stability:
+
+```bash
+ctest --test-dir build
+
+```
+
+---
+
+## Execution & Usage Example
+
+Once the build completes successfully, the command-line interface (CLI) executable will be located inside the `build/` directory.
+
+### Running the System
+
+Provide the target sum and the input list of numbers via the command-line arguments:
+
+```bash
+./build/twosum --target 9 --nums 2,7,11,15
+
+```
+
+*(Note: On Windows systems using MSVC, the path will be `.\build\Release\twosum.exe` depending on your build generator).*
+
+### Expected Output
+
+```json
+[0, 1]
+
+```
+
+---
 
 ## Supported Environments
-- **Windows:** Full compatibility
-- **macOS:** Full compatibility
-- **Linux:** Full compatibility
 
-## Notes
-- Ensure the correct Java version (17+) is installed: `java -version`
-- For Python, verify installation: `python --version` or `python3 --version`
-- Run commands from the directory containing the source files or provide the full file path
+* **Windows 11:** Full compatibility (tested with MSVC 2022)
+* **macOS:** Full compatibility (tested with Apple Clang)
+* **Linux (Ubuntu 22.04+):** Full compatibility (tested with GCC 13)
+
+## Troubleshooting
+
+* **Compiler Not Found:** If CMake fails to find a valid compiler, ensure your C++23 compiler path is correctly added to the system `PATH` environment variable.
+* **Cache Conflicts / Clean Build:** To clean previous build artifacts or fix configuration cache issues, safely delete the `build/` directory and re-run the configuration step:
+```bash
+rm -rf build
+
+```
