@@ -1,10 +1,10 @@
 #include "twoSum.hpp"
 #include <iostream>
 #include <vector>
-#include <string_view>
+#include <string>
 
 struct TestCase {
-    std::string_view name;
+    std::string name;
     std::vector<int> nums;
     int target;
     std::vector<int> expected;
