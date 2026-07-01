@@ -1,0 +1,10 @@
+^C:\USERS\Z\DESKTOP\藤椅璇\CS351\PROJECT0\1402_CS351_PROJECT0\BUILD\CMAKEFILES\2DF3C8A756D7A6CE0721C07827B99A05\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/z/Desktop/藤椅璇/CS351/project0/1402_CS351_Project0 -BC:/Users/z/Desktop/藤椅璇/CS351/project0/1402_CS351_Project0/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/z/Desktop/藤椅璇/CS351/project0/1402_CS351_Project0/build/TwoSum.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
